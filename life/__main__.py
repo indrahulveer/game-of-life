@@ -17,6 +17,8 @@ def main(argv=None) -> int:
     p.add_argument("--width", type=int, default=60)
     p.add_argument("--height", type=int, default=24)
     args = p.parse_args(argv)
+    if hasattr(sys.stdout, "reconfigure"):  # Windows consoles may default to cp1252
+        sys.stdout.reconfigure(encoding="utf-8")
 
     if args.list:
         print("\n".join(sorted(patterns.PATTERNS)))
